@@ -1,6 +1,9 @@
 package com.strategicgame.ui;
 
 import com.strategicgame.core.GameManager;
+import com.strategicgame.map.GameMap;
+import com.strategicgame.map.Position;
+import com.strategicgame.map.Tile;
 import com.strategicgame.player.Player;
 import com.strategicgame.units.Unit;
 import com.strategicgame.buildings.Building;
@@ -23,6 +26,14 @@ public class GameUI {
         this.gameManager = GameManager.getInstance();
         this.scanner = new Scanner(System.in);
     }
+
+
+    public int readInt() {
+    int value = scanner.nextInt();
+    scanner.nextLine(); // consommer le \n
+    return value;
+    }
+
 
     /**
      * Displays the main menu.
@@ -104,9 +115,12 @@ public class GameUI {
         System.out.println("\n--- Your Turn ---");
         System.out.println("1. View Units");
         System.out.println("2. View Buildings");
-        System.out.println("3. Train Unit");
-        System.out.println("4. Build Building");
-        System.out.println("5. End Turn");
+        System.out.println("3. View Map");
+        System.out.println("4. Train Unit");
+        System.out.println("5. Build Building");
+        System.out.println("6. Move Unit");
+        System.out.println("7. Attack");
+        System.out.println("8. End Turn");
         System.out.print("Choose action: ");
         return scanner.nextInt();
     }
@@ -154,6 +168,21 @@ public class GameUI {
             default: return null;
         }
     }
+
+
+    /**
+     * Displays the map
+     * 
+     * @param map The current map
+     */
+
+   public void displayMap(GameMap map) {
+    System.out.println("\n=== MAP ===");
+    map.displayMap();      // on réutilise la méthode de GameMap
+    System.out.println();
+}
+
+
 
     /**
      * Displays a game over message.

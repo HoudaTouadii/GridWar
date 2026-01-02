@@ -1,7 +1,8 @@
 package com.strategicgame.map;
 
 import java.util.*;
-import java.util.Random;
+
+import com.strategicgame.units.Unit;
 
 /**
  * GameMap manages the game world grid.
@@ -159,4 +160,23 @@ public class GameMap {
             System.out.println();
         }
     }
+
+    /**
+     * 
+     */
+
+    public Position findUnitPosition(Unit unit) {
+    for (Map.Entry<Position, Tile> entry : tiles.entrySet()) {
+        Tile tile = entry.getValue();
+        Object occupant = tile.getOccupant();   // Unit ou Building
+
+        if (occupant == unit) {                // même instance
+            return entry.getKey();             // la Position associée
+        }
+    }
+    return null;
+}
+
+
+
 }

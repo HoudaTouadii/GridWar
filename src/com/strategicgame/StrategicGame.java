@@ -4,9 +4,12 @@ import com.strategicgame.core.*;
 import com.strategicgame.player.Player;
 import com.strategicgame.units.*;
 import com.strategicgame.buildings.*;
+import com.strategicgame.combat.CombatResolver;
 import com.strategicgame.resources.ResourceType;
 import com.strategicgame.ui.GameUI;
 import java.util.*;
+import com.strategicgame.map.*;
+
 
 /**
  * StrategicGame is the main concrete game implementation.
@@ -27,10 +30,26 @@ public class StrategicGame extends Game {
      * 
      * @param args Command line arguments (unused)
      */
-    public static void main(String[] args) {
+   public static void main(String[] args) {
+    GameUI ui = new GameUI();              // créer l'UI console
+    int choice = ui.displayMainMenu();     // afficher le menu principal
+
+    if (choice == 1) {
+        // Nouvelle partie
         StrategicGame game = new StrategicGame();
-        game.run();
+        game.ui = ui;                      // réutiliser la même UI
+        game.run();                        // lance initialize() puis la boucle update/render
+    } else if (choice == 2) {
+        // Charger partie (pas implémenté)
+        ui.showMessage("Load Game not implemented yet.");
+    } else if (choice == 3) {
+        ui.showMessage("Goodbye!");
+        System.exit(0);
+    } else {
+        ui.showError("Invalid choice!");
+        System.exit(0);
     }
+}
 
     @Override
     public void initialize() {
@@ -38,7 +57,7 @@ public class StrategicGame extends Game {
         gameManager = GameManager.getInstance();
         ui = new GameUI();
         
-        System.out.println("Initializing Strategic Game...");
+        System.out.println("Initializing GridWar...");
         
         // Initialize game with map and players
         gameManager.initializeGame(MAP_WIDTH, MAP_HEIGHT, PLAYER_COUNT);
@@ -63,7 +82,26 @@ public class StrategicGame extends Game {
             player.addUnit(soldier1);
             player.addUnit(soldier2);
             player.addUnit(archer);
+
+            // Place starting units on the map by default
+
+            Position pos1 = new Position(0, 0);
+            Position pos2 = new Position(1, 0);
+            Position pos3 = new Position(2, 0);
+
+            Tile tile1 = gameManager.getGameMap().getTile(pos1);
+            Tile tile2 = gameManager.getGameMap().getTile(pos2);
+            Tile tile3 = gameManager.getGameMap().getTile(pos3);
+
+            tile1.setOccupant(soldier1);
+            tile2.setOccupant(soldier2);
+            tile3.setOccupant(archer);
             
+            System.out.println("Placed unit id=" + soldier1.getId() + " at (0,0) for player " + player.getName());
+            System.out.println("Placed unit id=" + soldier2.getId() + " at (1,0) for player " + player.getName());
+            System.out.println("Placed unit id=" + archer.getId()   + " at (2,0) for player " + player.getName());
+
+
             // Add starting building
             Building commandCenter = new CommandCenter();
             commandCenter.completeConstruction();
@@ -91,26 +129,36 @@ public class StrategicGame extends Game {
             int choice = ui.displayTurnMenu();
             
             switch (choice) {
-                case 1: // View Units
-                    ui.displayUnits(currentPlayer);
-                    break;
-                case 2: // View Buildings
-                    ui.displayBuildings(currentPlayer);
-                    break;
-                case 3: // Train Unit
-                    trainUnit(currentPlayer);
-                    break;
-                case 4: // Build Building
-                    buildBuilding(currentPlayer);
-                    break;
-                case 5: // End Turn
-                    currentPlayer.endTurn();
-                    gameManager.nextTurn();
-                    turnComplete = true;
-                    break;
-                default:
-                    ui.showError("Invalid choice!");
+             case 1:
+                 ui.displayUnits(currentPlayer);
+                break;
+            case 2:
+                ui.displayBuildings(currentPlayer);
+                break;
+            case 3:
+                 ui.displayMap(gameManager.getGameMap()); 
+                break;
+            case 4:
+                trainUnit(currentPlayer);
+                break;
+            case 5:
+                buildBuilding(currentPlayer);
+                break;
+            case 6:
+                moveUnit(currentPlayer);
+                break;
+            case 7:
+                attack(currentPlayer); 
+                break;
+            case 8:
+                 currentPlayer.endTurn();
+                gameManager.nextTurn();
+                turnComplete = true;
+                break;
+            default:
+                ui.showError("Invalid choice!");
             }
+            
         }
 
         // Check win condition
@@ -187,6 +235,156 @@ public class StrategicGame extends Game {
             " (" + newBuilding.getConstructionTime() + " turns)");
     }
 
+
+    /**
+     * Attacking other units or buildings
+     *
+     */
+    
+    private void attack(Player attackerPlayer) {
+        // On suppose 2 joueurs : l'autre joueur est l'ennemi
+        Player defenderPlayer = gameManager.getPlayers()
+                .stream()
+                .filter(p -> p != attackerPlayer)
+                .findFirst()
+                .orElse(null);
+    
+        if (defenderPlayer == null) {
+            System.out.println("No enemy player found.");
+            return;
+        }
+    
+        if (attackerPlayer.getUnits().isEmpty()) {
+            System.out.println("You have no units to attack with.");
+            return;
+        }
+        if (defenderPlayer.getUnits().isEmpty()) {
+            System.out.println("Enemy has no units to attack.");
+            return;
+        }
+    
+        // Choix unité attaquante
+        System.out.println("\nChoose attacking unit:");
+        for (int i = 0; i < attackerPlayer.getUnits().size(); i++) {
+            Unit u = attackerPlayer.getUnits().get(i);
+            System.out.println((i + 1) + ". " + u.getName() + " (HP: " + u.getHealth() + ")");
+        }
+        System.out.print("Your choice: ");
+        int attIndex = ui.readInt() - 1; 
+    
+        if (attIndex < 0 || attIndex >= attackerPlayer.getUnits().size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+        Unit attacker = attackerPlayer.getUnits().get(attIndex);
+    
+        // Choix unité cible
+        System.out.println("\nChoose target unit:");
+        for (int i = 0; i < defenderPlayer.getUnits().size(); i++) {
+            Unit u = defenderPlayer.getUnits().get(i);
+            System.out.println((i + 1) + ". " + u.getName() + " (HP: " + u.getHealth() + ")");
+        }
+        System.out.print("Your choice: ");
+        int defIndex = ui.readInt() - 1;
+        if (defIndex < 0 || defIndex >= defenderPlayer.getUnits().size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+        Unit defender = defenderPlayer.getUnits().get(defIndex);
+    
+        // Résoudre le combat
+        CombatResolver resolver = new CombatResolver();
+            boolean defenderKilled = resolver.resolveCombat(attacker, defender);
+
+            System.out.println("\nAttack resolved!");
+            System.out.println(attacker.getName() + " attacked " + defender.getName()
+            + " (HP now: " + defender.getHealth() + ")");
+
+            if (defenderKilled) {
+            System.out.println("Enemy unit defeated!");
+            defenderPlayer.removeUnit(defender);
+        }
+
+    }
+
+  /** Deplacement sur la carte
+   * 
+   * @param player
+   */
+
+    private void moveUnit(Player player) {
+    System.out.println("=== Move Unit ===");
+
+    // 1. Sélection de l'unité
+    System.out.println("Your units:");
+    for (Unit u : player.getUnits()) {
+    System.out.println(" - id=" + u.getId() + ", name=" + u.getName());
+}
+
+    System.out.print("Enter unit ID to move: ");
+    int unitId = ui.readInt();
+    
+    Unit unit = player.getUnitById(unitId);
+    if (unit == null) {
+        System.out.println("No unit found with this ID.");
+        return;
+    }
+    
+    System.out.println("Trying to move unit id=" + unit.getId() + " of player " + player.getName());
+    Position debugPos = gameManager.getGameMap().findUnitPosition(unit);
+    System.out.println("Debug position = " + debugPos);
+
+
+    // 2. Saisie de la position cible
+    System.out.print("Enter target X (0.." + (gameManager.getGameMap().getWidth() - 1) + "): ");
+    int x = ui.readInt();
+    System.out.print("Enter target Y (0.." + (gameManager.getGameMap().getHeight() - 1) + "): ");
+    int y = ui.readInt();
+
+    Position target = new Position(x, y);
+
+    // 3. Vérifications
+
+    // 3.1. Limites de la carte
+    if (!(gameManager.getGameMap()).isWithinBounds(target)) {
+        System.out.println("Target position is out of bounds.");
+        return;
+    }
+
+    Tile targetTile = gameManager.getGameMap().getTile(target);
+
+    // 3.2. Passable ?
+    if (!targetTile.isPassable()) {
+        System.out.println("You cannot move to this tile (not passable).");
+        return;
+    }
+
+    // 3.3. Occupation
+    if (!targetTile.isEmpty()) {
+        System.out.println("This tile is already occupied.");
+        return;
+    }
+
+    // 4. Trouver la position actuelle de l'unité
+    Position currentPos = gameManager.getGameMap().findUnitPosition(unit);
+    if (currentPos == null) {
+        System.out.println("Could not find the current position of this unit on the map.");
+        return;
+    }
+
+    // 5. Appliquer le mouvement
+    Tile currentTile = gameManager.getGameMap().getTile(currentPos);
+    currentTile.clearOccupant();     // enlève l'unité de l'ancienne case
+    targetTile.setOccupant(unit);    // place l'unité sur la nouvelle case
+
+    // 6. Feedback
+    System.out.println("Unit " + unitId + " moved from " +
+            "(" + currentPos.getX() + "," + currentPos.getY() + ") to " +
+            "(" + target.getX() + "," + target.getY() + ").");
+}
+
+
+    
     @Override
     public void render() {
         if (currentState == GameState.GAME_OVER) {

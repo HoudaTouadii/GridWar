@@ -19,6 +19,7 @@ public class Player {
     private final Faction faction;
     private final ResourceManager resourceManager;
     private final List<Unit> units;
+    private int nextUnitId = 1;  // compteur d'ID pour un joueur
     private final List<Building> buildings;
     private int score;
     private boolean hasLost;
@@ -76,8 +77,18 @@ public class Player {
      * @return List of units
      */
     public List<Unit> getUnits() {
-        return new ArrayList<>(units);
+        return units;
     }
+  
+    public Unit getUnitById(int id) {
+    for (Unit u : units) {       // on parcourt les unités de CE joueur
+        if (u.getId() == id) {   // on compare avec l'id stocké dans Unit
+            return u;            // on a trouvé la bonne unité
+        }
+    }
+    return null;                 // aucune unité avec cet id
+}
+
 
     /**
      * Adds a unit to this player's army.
@@ -86,6 +97,8 @@ public class Player {
      */
     public void addUnit(Unit unit) {
         unit.setOwner(this);
+        unit.setId(nextUnitId);  // donner un ID à l'unité (1,2,3,...)
+        nextUnitId++;
         units.add(unit);
     }
 

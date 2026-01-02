@@ -211,4 +211,19 @@ public abstract class Unit {
         return String.format("%s(HP:%d/%d, ATK:%d, DEF:%d, RNG:%d)", 
             name, health, maxHealth, attack, defense, range);
     }
+
+    /**
+     * id de l'unité dans la liste des unités du joueur
+     */
+    protected int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 }
