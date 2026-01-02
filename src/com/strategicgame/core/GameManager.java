@@ -135,6 +135,15 @@ public class GameManager {
     }
 
     /**
+     * Gets the current player index
+     * 
+     * @return Current player index
+     */
+    public int getCurrentPlayerIndex() {
+    return currentPlayerIndex;
+    }
+
+    /**
      * Checks if the game is over.
      * 
      * @return true if game is finished

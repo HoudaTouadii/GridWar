@@ -25,6 +25,8 @@ public class StrategicGame extends Game {
     private static final int MAP_HEIGHT = 20;
     private static final int PLAYER_COUNT = 2;
 
+    private AiController aiController;
+
     /**
      * Main entry point for the game.
      * 
@@ -55,6 +57,7 @@ public class StrategicGame extends Game {
     public void initialize() {
         isRunning = true;
         gameManager = GameManager.getInstance();
+        aiController = new AiController();
         ui = new GameUI();
         
         System.out.println("Initializing GridWar...");
@@ -114,59 +117,66 @@ public class StrategicGame extends Game {
 
     @Override
     public void update(double delta) {
-        if (currentState != GameState.PLAYING) {
-            return;
-        }
+    if (currentState != GameState.PLAYING) {
+        return;
+    }
 
-        Player currentPlayer = gameManager.getCurrentPlayer();
-        
-        // Display game status
+    Player currentPlayer = gameManager.getCurrentPlayer();
+    int currentIndex = gameManager.getCurrentPlayerIndex();
+
+    // Player at index 0 = human, others = AI
+if (currentIndex == 0) {
+
+        // Human turn with menu
         ui.displayGameStatus();
-        
-        // Player turn loop
+
         boolean turnComplete = false;
         while (!turnComplete) {
             int choice = ui.displayTurnMenu();
-            
             switch (choice) {
-             case 1:
-                 ui.displayUnits(currentPlayer);
-                break;
-            case 2:
-                ui.displayBuildings(currentPlayer);
-                break;
-            case 3:
-                 ui.displayMap(gameManager.getGameMap()); 
-                break;
-            case 4:
-                trainUnit(currentPlayer);
-                break;
-            case 5:
-                buildBuilding(currentPlayer);
-                break;
-            case 6:
-                moveUnit(currentPlayer);
-                break;
-            case 7:
-                attack(currentPlayer); 
-                break;
-            case 8:
-                 currentPlayer.endTurn();
-                gameManager.nextTurn();
-                turnComplete = true;
-                break;
-            default:
-                ui.showError("Invalid choice!");
+                case 1:
+                    ui.displayUnits(currentPlayer);
+                    break;
+                case 2:
+                    ui.displayBuildings(currentPlayer);
+                    break;
+                case 3:
+                    ui.displayMap(gameManager.getGameMap());
+                    break;
+                case 4:
+                    trainUnit(currentPlayer);
+                    break;
+                case 5:
+                    buildBuilding(currentPlayer);
+                    break;
+                case 6:
+                    moveUnit(currentPlayer);
+                    break;
+                case 7:
+                    attack(currentPlayer);
+                    break;
+                case 8:
+                    currentPlayer.endTurn();
+                    gameManager.nextTurn();
+                    turnComplete = true;
+                    break;
+                default:
+                    ui.showError("Invalid choice!");
             }
-            
         }
-
-        // Check win condition
-        if (gameManager.isGameOver()) {
-            currentState = GameState.GAME_OVER;
-            isRunning = false;
-        }
+    } else {
+        // AI turn
+        aiController.playTurn(currentPlayer, gameManager);
+        gameManager.nextTurn();
     }
+
+    // Check win condition
+    if (gameManager.isGameOver()) {
+        currentState = GameState.GAME_OVER;
+        isRunning = false;
+    }
+}
+
 
     /**
      * Handles unit training.
