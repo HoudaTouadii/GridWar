@@ -30,7 +30,7 @@ public class StrategicGame extends Game {
     /**
      * Main entry point for the game.
      * 
-     * @param args Command line arguments (unused)
+     * @param args 
      */
    public static void main(String[] args) {
     GameUI ui = new GameUI();              // créer l'UI console
@@ -247,75 +247,122 @@ if (currentIndex == 0) {
 
 
     /**
-     * Attacking other units or buildings
-     *
+     * Attack units or buildings of the ennemy
+     * 
+     * @param attackerPlayer
      */
     
     private void attack(Player attackerPlayer) {
-        // On suppose 2 joueurs : l'autre joueur est l'ennemi
-        Player defenderPlayer = gameManager.getPlayers()
-                .stream()
-                .filter(p -> p != attackerPlayer)
-                .findFirst()
-                .orElse(null);
-    
-        if (defenderPlayer == null) {
-            System.out.println("No enemy player found.");
+    Player defenderPlayer = gameManager.getPlayers().stream()
+            .filter(p -> p != attackerPlayer)
+            .findFirst()
+            .orElse(null);
+
+    if (defenderPlayer == null) {
+        ui.showError("No enemy player found!");
+        return;
+    }
+
+    // Choix du type de cible
+    ui.showMessage("Choose attack target type:");
+    ui.showMessage("1. Enemy unit");
+    ui.showMessage("2. Enemy building");
+    int targetType = ui.readInt();
+
+    if (targetType == 1) {
+        // === ATTAQUE D'UNITE  ===
+        if (attackerPlayer.getUnits().isEmpty() || defenderPlayer.getUnits().isEmpty()) {
+            ui.showError("No units available for combat!");
             return;
         }
-    
-        if (attackerPlayer.getUnits().isEmpty()) {
-            System.out.println("You have no units to attack with.");
+
+        ui.showMessage("Choose your attacking unit:");
+        ui.displayUnits(attackerPlayer);
+        int attackerIndex = ui.readInt() -1;
+        if (attackerIndex < 0 || attackerIndex >= attackerPlayer.getUnits().size()) {
+            ui.showError("Invalid unit selection!");
             return;
         }
-        if (defenderPlayer.getUnits().isEmpty()) {
-            System.out.println("Enemy has no units to attack.");
+
+        ui.showMessage("Choose enemy unit to attack:");
+        ui.displayUnits(defenderPlayer);
+        int defenderIndex = ui.readInt() -1;
+        if (defenderIndex < 0 || defenderIndex >= defenderPlayer.getUnits().size()) {
+            ui.showError("Invalid target selection!");
             return;
         }
-    
-        // Choix unité attaquante
-        System.out.println("\nChoose attacking unit:");
-        for (int i = 0; i < attackerPlayer.getUnits().size(); i++) {
-            Unit u = attackerPlayer.getUnits().get(i);
-            System.out.println((i + 1) + ". " + u.getName() + " (HP: " + u.getHealth() + ")");
-        }
-        System.out.print("Your choice: ");
-        int attIndex = ui.readInt() - 1; 
-    
-        if (attIndex < 0 || attIndex >= attackerPlayer.getUnits().size()) {
-            System.out.println("Invalid choice.");
-            return;
-        }
-        Unit attacker = attackerPlayer.getUnits().get(attIndex);
-    
-        // Choix unité cible
-        System.out.println("\nChoose target unit:");
-        for (int i = 0; i < defenderPlayer.getUnits().size(); i++) {
-            Unit u = defenderPlayer.getUnits().get(i);
-            System.out.println((i + 1) + ". " + u.getName() + " (HP: " + u.getHealth() + ")");
-        }
-        System.out.print("Your choice: ");
-        int defIndex = ui.readInt() - 1;
-        if (defIndex < 0 || defIndex >= defenderPlayer.getUnits().size()) {
-            System.out.println("Invalid choice.");
-            return;
-        }
-        Unit defender = defenderPlayer.getUnits().get(defIndex);
-    
-        // Résoudre le combat
+
+        com.strategicgame.units.Unit attacker =
+                attackerPlayer.getUnits().get(attackerIndex);
+        com.strategicgame.units.Unit defender =
+                defenderPlayer.getUnits().get(defenderIndex);
+
         CombatResolver resolver = new CombatResolver();
-            boolean defenderKilled = resolver.resolveCombat(attacker, defender);
+        boolean defenderKilled = resolver.resolveCombat(attacker, defender);
 
-            System.out.println("\nAttack resolved!");
-            System.out.println(attacker.getName() + " attacked " + defender.getName()
-            + " (HP now: " + defender.getHealth() + ")");
+        ui.showMessage(attacker.getName() + " attacked "
+                + defender.getName() + " (HP now: " + defender.getHealth() + ")");
 
-            if (defenderKilled) {
-            System.out.println("Enemy unit defeated!");
+        if (defenderKilled) {
+            ui.showMessage("The enemy unit was defeated!");
             defenderPlayer.removeUnit(defender);
         }
 
+        } else if (targetType == 2) {
+        // === ATTAQUE DE BUILDING (CommandCenter, etc.) ===
+        if (defenderPlayer.getBuildings().isEmpty()) {
+            ui.showError("Enemy has no buildings to attack!");
+            return;
+        }
+
+        // Choisir l’unité attaquante
+        if (attackerPlayer.getUnits().isEmpty()) {
+            ui.showError("You have no units to attack with!");
+            return;
+        }
+
+        ui.showMessage("Choose your attacking unit:");
+        ui.displayUnits(attackerPlayer);
+        int attackerIndex = ui.readInt() -1;
+        if (attackerIndex < 0 || attackerIndex >= attackerPlayer.getUnits().size()) {
+            ui.showError("Invalid unit selection!");
+            return;
+        }
+
+        com.strategicgame.units.Unit attacker =
+                attackerPlayer.getUnits().get(attackerIndex);
+
+        // Choisir le bâtiment à cibler
+        ui.showMessage("Choose enemy building to attack:");
+        ui.displayBuildings(defenderPlayer);
+        int buildingIndex = ui.readInt() -1;
+        if (buildingIndex < 0 || buildingIndex >= defenderPlayer.getBuildings().size()) {
+            ui.showError("Invalid building selection!");
+            return;
+        }
+
+        com.strategicgame.buildings.Building targetBuilding =
+                defenderPlayer.getBuildings().get(buildingIndex);
+
+        // Appliquer les dégâts 
+        int damage = attacker.getAttack(); 
+        targetBuilding.takeDamage(damage);
+
+        ui.showMessage(attacker.getName() + " attacked building "
+                + targetBuilding.getName() + " (HP now: "
+                + targetBuilding.getCurrentHealth() + ")");
+
+        // Si détruit, retirer le bâtiment
+        if (targetBuilding.isDestroyed()) {
+            ui.showMessage("The enemy building was destroyed!");
+            defenderPlayer.removeBuilding(targetBuilding);
+        }
+
+    } else {
+        ui.showError("Invalid choice!");
     }
+    }
+
 
   /** Deplacement sur la carte
    * 
