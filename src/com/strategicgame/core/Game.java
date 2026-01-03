@@ -4,8 +4,6 @@ package com.strategicgame.core;
  * Abstract base class for the main game engine.
  * Defines the game loop and state management contract.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public abstract class Game {
     protected GameManager gameManager;
@@ -22,7 +20,7 @@ public abstract class Game {
     /**
      * Updates game logic based on delta time.
      * 
-     * @param delta Time elapsed since last update in milliseconds
+     * @param delta Time elapsed since last update
      */
     public abstract void update(double delta);
 

@@ -7,8 +7,6 @@ import java.util.*;
  * Implements the Single Responsibility Principle - only manages resources.
  * Uses HashMap for O(1) resource lookups.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class ResourceManager {
     private final Map<ResourceType, Integer> resources;
@@ -26,8 +24,7 @@ public class ResourceManager {
     }
 
     /**
-     * Gets the current amount of a specific resource.
-     * 
+     * Gets the current amount of a specific resource. 
      * @param type The resource type
      * @return Amount of resource
      */
@@ -36,8 +33,7 @@ public class ResourceManager {
     }
 
     /**
-     * Gets all current resources.
-     * 
+     * Gets all current resources. 
      * @return Map of resource types to amounts
      */
     public Map<ResourceType, Integer> getAllResources() {
@@ -45,8 +41,7 @@ public class ResourceManager {
     }
 
     /**
-     * Adds resources to the manager.
-     * 
+     * Adds resources to the manager. 
      * @param type The resource type
      * @param amount Amount to add
      */
@@ -56,8 +51,7 @@ public class ResourceManager {
     }
 
     /**
-     * Removes resources from the manager.
-     * 
+     * Removes resources from the manager. 
      * @param type The resource type
      * @param amount Amount to remove
      * @return true if successful, false if insufficient resources
@@ -72,8 +66,7 @@ public class ResourceManager {
     }
 
     /**
-     * Checks if player can afford a resource cost.
-     * 
+     * Checks if player can afford a resource cost. 
      * @param cost Map of resources and amounts needed
      * @return true if player has enough of all resources
      */
@@ -87,8 +80,7 @@ public class ResourceManager {
     }
 
     /**
-     * Spends multiple resources at once.
-     * 
+     * Spends multiple resources at once. 
      * @param cost Map of resources and amounts to spend
      * @return true if successful, false if insufficient resources
      */
@@ -114,8 +106,7 @@ public class ResourceManager {
     }
 
     /**
-     * Sets the production rate for a resource type.
-     * 
+     * Sets the production rate for a resource type. 
      * @param type The resource type
      * @param rate Production amount per turn
      */
@@ -124,8 +115,7 @@ public class ResourceManager {
     }
 
     /**
-     * Gets the production rate for a resource type.
-     * 
+     * Gets the production rate for a resource type. 
      * @param type The resource type
      * @return Production amount per turn
      */
@@ -134,8 +124,7 @@ public class ResourceManager {
     }
 
     /**
-     * Provides a string representation of current resources.
-     * 
+     * Provides a string representation of current resources. 
      * @return Formatted resource string
      */
     @Override

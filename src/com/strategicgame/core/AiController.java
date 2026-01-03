@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Very simple AI controller for Player 2.
+ * Very simple AI controller plays as Player 2 (mode solo contre la machine).
  * The AI:
  *  - finds the human player,
  *  - if both have units, attacks a random human unit,
- *  - otherwise just ends its turn.
+ *  - otherwise just ends its turn (can be developped later)
  */
 public class AiController {
 
@@ -20,7 +20,7 @@ public class AiController {
     public void playTurn(Player aiPlayer, GameManager gameManager) {
         System.out.println("\n=== AI TURN (" + aiPlayer.getName() + ") ===");
 
-        // Find human player (the one that is not the AI)
+        // Find human player 
         Player human = gameManager.getPlayers()
                 .stream()
                 .filter(p -> p != aiPlayer)

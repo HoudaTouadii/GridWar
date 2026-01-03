@@ -4,8 +4,6 @@ package com.strategicgame.player;
  * Faction enum represents different factions in the game.
  * Each faction can have unique bonuses and characteristics.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public enum Faction {
     EMPIRE("Empire", "Balanced faction with strong economy", 1.0f),

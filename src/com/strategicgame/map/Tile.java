@@ -6,8 +6,6 @@ import com.strategicgame.player.Player;
  * Tile represents a single cell on the game map.
  * Encapsulates tile type, owner, and any entities placed on it.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class Tile {
     private final Position position;
@@ -23,8 +21,7 @@ public class Tile {
     }
 
     /**
-     * Gets the position of this tile.
-     * 
+     * Gets the position of this tile. 
      * @return The position
      */
     public Position getPosition() {
@@ -32,8 +29,7 @@ public class Tile {
     }
 
     /**
-     * Gets the tile type.
-     * 
+     * Gets the tile type. 
      * @return The tile type
      */
     public TileType getType() {
@@ -41,8 +37,7 @@ public class Tile {
     }
 
     /**
-     * Gets the owner of this tile.
-     * 
+     * Gets the owner of this tile. 
      * @return The owning player, or null if unowned
      */
     public Player getOwner() {
@@ -50,8 +45,7 @@ public class Tile {
     }
 
     /**
-     * Sets the owner of this tile.
-     * 
+     * Sets the owner of this tile. 
      * @param owner The new owner
      */
     public void setOwner(Player owner) {
@@ -60,7 +54,6 @@ public class Tile {
 
     /**
      * Checks if this tile is passable by units.
-     * 
      * @return true if units can move through this tile
      */
     public boolean isPassable() {
@@ -69,7 +62,6 @@ public class Tile {
 
     /**
      * Gets the occupant on this tile.
-     * 
      * @return The occupant (Unit or Building), or null if empty
      */
     public Object getOccupant() {
@@ -78,7 +70,6 @@ public class Tile {
 
     /**
      * Sets the occupant on this tile.
-     * 
      * @param occupant The entity to place (Unit or Building)
      */
     public void setOccupant(Object occupant) {
@@ -94,13 +85,15 @@ public class Tile {
 
     /**
      * Checks if this tile is empty.
-     * 
      * @return true if no occupant
      */
     public boolean isEmpty() {
         return occupant == null;
     }
 
+    /**
+     * Affichage au format Tile[position, type, Owner's display name]
+     */
     @Override
     public String toString() {
         return String.format("Tile[%s, %s, Owner=%s]", 

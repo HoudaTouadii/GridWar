@@ -3,17 +3,15 @@ package com.strategicgame.units;
 /**
  * UnitFactory implements the Factory Design Pattern.
  * Responsible for creating units - encapsulates unit instantiation logic.
- * Supports the Open/Closed Principle - easy to add new unit types.
+ *  easy to add new unit types.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class UnitFactory {
     
     /**
      * Creates a unit based on the specified type.
      * 
-     * @param unitType Type of unit to create (case-insensitive)
+     * @param unitType Type of unit to create 
      * @return A new Unit instance, or null if type not recognized
      */
     public static Unit createUnit(String unitType) {
@@ -31,8 +29,7 @@ public class UnitFactory {
     }
 
     /**
-     * Creates a unit by enum value.
-     * 
+     * Creates a unit by enum value. 
      * @param type UnitType enum value
      * @return A new Unit instance
      */
@@ -41,8 +38,7 @@ public class UnitFactory {
     }
 
     /**
-     * Gets all available unit types.
-     * 
+     * Gets all available unit types. 
      * @return Array of unit type names
      */
     public static String[] getAvailableUnits() {
@@ -50,8 +46,7 @@ public class UnitFactory {
     }
 
     /**
-     * Gets cost of a unit type without instantiating it.
-     * 
+     * Gets cost of a unit type without instantiating it. 
      * @param unitType Type name
      * @return Cost in resources
      */

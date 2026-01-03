@@ -3,9 +3,6 @@ package com.strategicgame.buildings;
 /**
  * Enum for building types.
  * Used by the BuildingFactory for type-safe building creation.
- * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public enum BuildingType {
     COMMAND_CENTER("CommandCenter"),

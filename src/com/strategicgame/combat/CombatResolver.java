@@ -8,8 +8,6 @@ import java.util.Random;
  * Implements the Single Responsibility Principle.
  * Encapsulates combat logic including damage calculations and outcomes.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class CombatResolver {
     private final Random random;
@@ -91,27 +89,4 @@ public class CombatResolver {
         return attacker.calculateDamage(defender);
     }
 
-    /**
-     * Simulates a multi-turn skirmish between units.
-     * 
-     * @param unit1 First unit
-     * @param unit2 Second unit
-     * @return The surviving unit, or null if both die
-     */
-    public Unit simulateSkirmish(Unit unit1, Unit unit2) {
-        int rounds = 0;
-        int maxRounds = 20; // Prevent infinite loops
-
-        while (unit1.isAlive() && unit2.isAlive() && rounds < maxRounds) {
-            resolveCombat(unit1, unit2);
-            if (unit2.isAlive()) {
-                resolveCombat(unit2, unit1);
-            }
-            rounds++;
-        }
-
-        if (unit1.isAlive()) return unit1;
-        if (unit2.isAlive()) return unit2;
-        return null;
-    }
 }

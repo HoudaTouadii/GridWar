@@ -6,8 +6,6 @@ import java.util.Random;
  * Cavalry unit - fast, strong unit with high movement speed.
  * Specialized charge damage calculation.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class Cavalry extends Unit {
     private static final int HEALTH = 25;

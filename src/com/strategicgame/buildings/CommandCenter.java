@@ -7,8 +7,6 @@ import java.util.*;
  * CommandCenter building - central control structure of each faction.
  * Required for base control. Provides bonuses to unit production.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class CommandCenter extends Building {
     private static final int HEALTH = 100;

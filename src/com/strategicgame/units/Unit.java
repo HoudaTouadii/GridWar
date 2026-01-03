@@ -2,15 +2,12 @@ package com.strategicgame.units;
 
 import com.strategicgame.map.Position;
 import com.strategicgame.player.Player;
-import java.util.*;
 
 /**
  * Abstract base class for all game units.
  * Defines the contract for unit behavior - HP, attack, defense, movement.
- * Implements Encapsulation and Abstraction principles from OOP.
+ * Implements Encapsulation and Abstraction principles from POO.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public abstract class Unit {
     private final String name;
@@ -49,8 +46,7 @@ public abstract class Unit {
     public abstract int calculateDamage(Unit target);
 
     /**
-     * Gets the unit type name.
-     * 
+     * Gets the unit type name. 
      * @return Unit type name
      */
     public String getName() {
@@ -58,8 +54,7 @@ public abstract class Unit {
     }
 
     /**
-     * Gets current health.
-     * 
+     * Gets current health. 
      * @return Health points
      */
     public int getHealth() {
@@ -67,8 +62,7 @@ public abstract class Unit {
     }
 
     /**
-     * Takes damage and reduces health.
-     * 
+     * Takes damage and reduces health. 
      * @param damage Damage to take
      */
     public void takeDamage(int damage) {
@@ -76,8 +70,7 @@ public abstract class Unit {
     }
 
     /**
-     * Heals the unit (up to max health).
-     * 
+     * Heals the unit (up to max health). 
      * @param amount Amount to heal
      */
     public void heal(int amount) {
@@ -86,7 +79,6 @@ public abstract class Unit {
 
     /**
      * Checks if unit is alive.
-     * 
      * @return true if health > 0
      */
     public boolean isAlive() {
@@ -94,8 +86,7 @@ public abstract class Unit {
     }
 
     /**
-     * Gets attack power.
-     * 
+     * Gets attack power. 
      * @return Attack value
      */
     public int getAttack() {
@@ -103,8 +94,7 @@ public abstract class Unit {
     }
 
     /**
-     * Gets defense value.
-     * 
+     * Gets defense value. 
      * @return Defense value
      */
     public int getDefense() {
@@ -112,8 +102,7 @@ public abstract class Unit {
     }
 
     /**
-     * Gets attack range.
-     * 
+     * Gets attack range. 
      * @return Range in tiles
      */
     public int getRange() {
@@ -121,8 +110,7 @@ public abstract class Unit {
     }
 
     /**
-     * Gets cost to produce this unit.
-     * 
+     * Gets cost to produce this unit. 
      * @return Resource cost
      */
     public int getCost() {
@@ -130,8 +118,7 @@ public abstract class Unit {
     }
 
     /**
-     * Gets movement speed per turn.
-     * 
+     * Gets movement speed per turn. 
      * @return Movement range
      */
     public int getMovementSpeed() {
@@ -139,8 +126,7 @@ public abstract class Unit {
     }
 
     /**
-     * Gets unit position.
-     * 
+     * Gets unit position. 
      * @return Current position
      */
     public Position getPosition() {
@@ -148,8 +134,7 @@ public abstract class Unit {
     }
 
     /**
-     * Sets unit position.
-     * 
+     * Sets unit position. 
      * @param position New position
      */
     public void setPosition(Position position) {
@@ -157,8 +142,7 @@ public abstract class Unit {
     }
 
     /**
-     * Gets unit owner.
-     * 
+     * Gets unit owner. 
      * @return Owning player
      */
     public Player getOwner() {
@@ -166,8 +150,7 @@ public abstract class Unit {
     }
 
     /**
-     * Sets unit owner.
-     * 
+     * Sets unit owner. 
      * @param owner New owner
      */
     public void setOwner(Player owner) {
@@ -175,8 +158,7 @@ public abstract class Unit {
     }
 
     /**
-     * Checks if unit has already moved this turn.
-     * 
+     * Checks if unit has already moved this turn. 
      * @return true if moved
      */
     public boolean hasMovedThisTurn() {
@@ -198,25 +180,27 @@ public abstract class Unit {
     }
 
     /**
-     * Gets health percentage.
-     * 
+     * Gets health percentage. 
      * @return Health as percentage (0-100)
      */
     public int getHealthPercentage() {
         return (health * 100) / maxHealth;
     }
 
+    /**
+     * Affichage au format : nom(HP:currentHP/maxHP, ATK, DEF, RNG)
+     */
     @Override
     public String toString() {
         return String.format("%s(HP:%d/%d, ATK:%d, DEF:%d, RNG:%d)", 
             name, health, maxHealth, attack, defense, range);
     }
 
+
+    protected int id;
     /**
      * id de l'unité dans la liste des unités du joueur
      */
-    protected int id;
-
     public int getId() {
         return id;
     }

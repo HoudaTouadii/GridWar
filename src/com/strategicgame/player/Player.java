@@ -6,12 +6,10 @@ import com.strategicgame.buildings.Building;
 import java.util.*;
 
 /**
- * Player class represents a player in the game.
+ * Player class represents a player in the game (human or AI).
  * Manages resources, units, buildings, and faction information.
- * Uses composition with ResourceManager (aggregation).
+ * Uses composition with ResourceManager.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class Player {
     private final String name;
@@ -19,7 +17,7 @@ public class Player {
     private final Faction faction;
     private final ResourceManager resourceManager;
     private final List<Unit> units;
-    private int nextUnitId = 1;  // compteur d'ID pour un joueur
+    private int nextUnitId = 1;  // compteur d'ID des unités pour un joueur
     private final List<Building> buildings;
     private int score;
     private boolean hasLost;
@@ -37,7 +35,6 @@ public class Player {
 
     /**
      * Gets player name.
-     * 
      * @return Player name
      */
     public String getName() {
@@ -45,8 +42,7 @@ public class Player {
     }
 
     /**
-     * Gets player ID.
-     * 
+     * Gets player ID. 
      * @return Player ID
      */
     public int getPlayerId() {
@@ -55,7 +51,6 @@ public class Player {
 
     /**
      * Gets player faction.
-     * 
      * @return Faction
      */
     public Faction getFaction() {
@@ -63,8 +58,7 @@ public class Player {
     }
 
     /**
-     * Gets resource manager.
-     * 
+     * Gets resource manager. 
      * @return ResourceManager instance
      */
     public ResourceManager getResourceManager() {
@@ -72,8 +66,7 @@ public class Player {
     }
 
     /**
-     * Gets all units owned by this player.
-     * 
+     * Gets all units owned by this player. 
      * @return List of units
      */
     public List<Unit> getUnits() {
@@ -91,8 +84,7 @@ public class Player {
 
 
     /**
-     * Adds a unit to this player's army.
-     * 
+     * Adds a unit to this player's army. 
      * @param unit The unit to add
      */
     public void addUnit(Unit unit) {
@@ -103,8 +95,7 @@ public class Player {
     }
 
     /**
-     * Removes a unit from this player's army.
-     * 
+     * Removes a unit from this player's army. 
      * @param unit The unit to remove
      */
     public void removeUnit(Unit unit) {
@@ -112,8 +103,7 @@ public class Player {
     }
 
     /**
-     * Checks if player has any units.
-     * 
+     * Checks if player has any units. 
      * @return true if has units
      */
     public boolean hasUnits() {
@@ -121,8 +111,7 @@ public class Player {
     }
 
     /**
-     * Gets all buildings owned by this player.
-     * 
+     * Gets all buildings owned by this player. 
      * @return List of buildings
      */
     public List<Building> getBuildings() {
@@ -130,8 +119,7 @@ public class Player {
     }
 
     /**
-     * Adds a building to this player's territory.
-     * 
+     * Adds a building to this player's territory. 
      * @param building The building to add
      */
     public void addBuilding(Building building) {
@@ -140,8 +128,7 @@ public class Player {
     }
 
     /**
-     * Removes a building from this player's territory.
-     * 
+     * Removes a building from this player's territory. 
      * @param building The building to remove
      */
     public void removeBuilding(Building building) {
@@ -149,8 +136,7 @@ public class Player {
     }
 
     /**
-     * Checks if player has any buildings.
-     * 
+     * Checks if player has any buildings. 
      * @return true if has buildings
      */
     public boolean hasBuildings() {
@@ -196,8 +182,7 @@ public class Player {
     }
 
     /**
-     * Gets player score.
-     * 
+     * Gets player score. 
      * @return Score value
      */
     public int getScore() {
@@ -205,8 +190,7 @@ public class Player {
     }
 
     /**
-     * Adds to player score.
-     * 
+     * Adds to player score. 
      * @param points Points to add
      */
     public void addScore(int points) {
@@ -214,8 +198,7 @@ public class Player {
     }
 
     /**
-     * Checks if player has lost.
-     * 
+     * Checks if player has lost. 
      * @return true if defeated
      */
     public boolean hasLost() {
@@ -230,8 +213,7 @@ public class Player {
     }
 
     /**
-     * Gets a summary of player status.
-     * 
+     * Gets a summary of player status. 
      * @return Status string
      */
     public String getStatus() {

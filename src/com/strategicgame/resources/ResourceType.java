@@ -4,8 +4,6 @@ package com.strategicgame.resources;
  * Enum representing different types of resources in the game.
  * Resources are collected and consumed to build units and structures.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public enum ResourceType {
     GOLD("Gold", "Precious metal for trade and construction", 100),

@@ -5,13 +5,12 @@ import java.util.*;
 /**
  * Position represents coordinates on the game map.
  * Provides utility methods for distance calculations and neighbor finding.
- * 
- * @author Strategic Game Team
- * @version 1.0
+ * ! the development of some functionalities that concern position wasn't finished
+ * ! that's why you may find some unused methodes
  */
 public class Position {
-    private final int x;
-    private final int y;
+    private final int x; //abscisse
+    private final int y; //ordonnée
 
     public Position(int x, int y) {
         this.x = x;
@@ -20,7 +19,6 @@ public class Position {
 
     /**
      * Gets X coordinate.
-     * 
      * @return X position
      */
     public int getX() {
@@ -29,7 +27,6 @@ public class Position {
 
     /**
      * Gets Y coordinate.
-     * 
      * @return Y position
      */
     public int getY() {
@@ -93,6 +90,9 @@ public class Position {
         return Objects.hash(x, y);
     }
 
+    /**
+     * Affichage au format Position(x,y)
+     */
     @Override
     public String toString() {
         return String.format("Position(%d, %d)", x, y);

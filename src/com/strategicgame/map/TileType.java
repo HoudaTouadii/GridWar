@@ -4,8 +4,6 @@ package com.strategicgame.map;
  * Enum representing different tile types on the game map.
  * Each type has different properties and bonuses/maluses.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public enum TileType {
     GRASS("Grass", true, 1.0f, "Standard terrain"),

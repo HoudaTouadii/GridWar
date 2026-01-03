@@ -2,8 +2,6 @@ package com.strategicgame.ui;
 
 import com.strategicgame.core.GameManager;
 import com.strategicgame.map.GameMap;
-import com.strategicgame.map.Position;
-import com.strategicgame.map.Tile;
 import com.strategicgame.player.Player;
 import com.strategicgame.units.Unit;
 import com.strategicgame.buildings.Building;
@@ -15,8 +13,6 @@ import java.util.*;
  * Displays game state, player information, and handles menu interactions.
  * Uses the Single Responsibility Principle - only handles UI display.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class GameUI {
     private final GameManager gameManager;
@@ -36,8 +32,7 @@ public class GameUI {
 
 
     /**
-     * Displays the main menu.
-     * 
+     * Displays the main menu. 
      * @return Selected menu option
      */
     public int displayMainMenu() {
@@ -61,8 +56,7 @@ public class GameUI {
     }
 
     /**
-     * Displays player resources.
-     * 
+     * Displays player resources. 
      * @param player The player to display resources for
      */
     private void displayResources(Player player) {
@@ -75,8 +69,7 @@ public class GameUI {
     }
 
     /**
-     * Displays player's units.
-     * 
+     * Displays player's units. 
      * @param player The player to display units for
      */
     public void displayUnits(Player player) {
@@ -91,8 +84,7 @@ public class GameUI {
     }
 
     /**
-     * Displays player's buildings.
-     * 
+     * Displays player's buildings. 
      * @param player The player to display buildings for
      */
     public void displayBuildings(Player player) {
@@ -107,8 +99,7 @@ public class GameUI {
     }
 
     /**
-     * Displays turn options menu.
-     * 
+     * Displays turn options menu. 
      * @return Selected option
      */
     public int displayTurnMenu() {
@@ -126,8 +117,7 @@ public class GameUI {
     }
 
     /**
-     * Displays available units to train.
-     * 
+     * Displays available units to train. 
      * @return Selected unit type
      */
     public String displayUnitTrainingMenu() {
@@ -146,8 +136,7 @@ public class GameUI {
     }
 
     /**
-     * Displays available buildings to construct.
-     * 
+     * Displays available buildings to construct. 
      * @return Selected building type
      */
     public String displayBuildingMenu() {
@@ -171,8 +160,7 @@ public class GameUI {
 
 
     /**
-     * Displays the map
-     * 
+     * Displays the map 
      * @param map The current map
      */
 
@@ -185,8 +173,7 @@ public class GameUI {
 
 
     /**
-     * Displays a game over message.
-     * 
+     * Displays a game over message. 
      * @param winner The winning player
      */
     public void displayGameOver(Player winner) {
@@ -200,8 +187,7 @@ public class GameUI {
     }
 
     /**
-     * Displays an error message.
-     * 
+     * Displays an error message. 
      * @param message The error message
      */
     public void showError(String message) {
@@ -209,8 +195,7 @@ public class GameUI {
     }
 
     /**
-     * Displays an info message.
-     * 
+     * Displays an info message. 
      * @param message The info message
      */
     public void showMessage(String message) {

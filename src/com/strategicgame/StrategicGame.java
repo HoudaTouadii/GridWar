@@ -16,21 +16,23 @@ import com.strategicgame.map.*;
  * Extends the abstract Game class and implements the actual game loop.
  * Entry point for the application.
  * 
- * @author Strategic Game Team
- * @version 1.0
+ * !vous allez peut etre constater que certaines fonctionnalités prévues
+ * !(des méthodes dans les classes) sont pas implémentées ici
+ * !mais grace au fait que le projet soit conçu selon les principes
+ * !de la POO favorisant l'extensibilité, l'intégration future de ces fonctionnalités
+ * !ou meme d'autres fcts est possible via des implémentations d'interfaces
+ * !ou extensions de classes. Merci :)
+ * 
  */
 public class StrategicGame extends Game {
     private GameUI ui;
     private static final int MAP_WIDTH = 20;
     private static final int MAP_HEIGHT = 20;
     private static final int PLAYER_COUNT = 2;
-
     private AiController aiController;
 
     /**
      * Main entry point for the game.
-     * 
-     * @param args 
      */
    public static void main(String[] args) {
     GameUI ui = new GameUI();              // créer l'UI console
@@ -42,12 +44,14 @@ public class StrategicGame extends Game {
         game.ui = ui;                      // réutiliser la même UI
         game.run();                        // lance initialize() puis la boucle update/render
     } else if (choice == 2) {
-        // Charger partie (pas implémenté)
+        // Charger partie (pas implémenté :( )
         ui.showMessage("Load Game not implemented yet.");
     } else if (choice == 3) {
+        // Quitter le jeu
         ui.showMessage("Goodbye!");
         System.exit(0);
     } else {
+        // nombre qui n'existe pas dans le menu
         ui.showError("Invalid choice!");
         System.exit(0);
     }
@@ -87,7 +91,6 @@ public class StrategicGame extends Game {
             player.addUnit(archer);
 
             // Place starting units on the map by default
-
             Position pos1 = new Position(0, 0);
             Position pos2 = new Position(1, 0);
             Position pos3 = new Position(2, 0);
@@ -124,8 +127,8 @@ public class StrategicGame extends Game {
     Player currentPlayer = gameManager.getCurrentPlayer();
     int currentIndex = gameManager.getCurrentPlayerIndex();
 
-    // Player at index 0 = human, others = AI
-if (currentIndex == 0) {
+    // Player at index 0 = human, other = AI
+    if (currentIndex == 0) {
 
         // Human turn with menu
         ui.displayGameStatus();
@@ -179,8 +182,7 @@ if (currentIndex == 0) {
 
 
     /**
-     * Handles unit training.
-     * 
+     * Handles unit training. 
      * @param player The player training units
      */
     private void trainUnit(Player player) {
@@ -218,8 +220,7 @@ if (currentIndex == 0) {
     }
 
     /**
-     * Handles building construction.
-     * 
+     * Handles building construction. 
      * @param player The player building
      */
     private void buildBuilding(Player player) {
@@ -247,8 +248,7 @@ if (currentIndex == 0) {
 
 
     /**
-     * Attack units or buildings of the ennemy
-     * 
+     * Attack units or buildings of the ennemy 
      * @param attackerPlayer
      */
     
@@ -275,7 +275,7 @@ if (currentIndex == 0) {
             ui.showError("No units available for combat!");
             return;
         }
-
+        // choisir l'unité attaquante
         ui.showMessage("Choose your attacking unit:");
         ui.displayUnits(attackerPlayer);
         int attackerIndex = ui.readInt() -1;
@@ -283,7 +283,7 @@ if (currentIndex == 0) {
             ui.showError("Invalid unit selection!");
             return;
         }
-
+        //choisir l'unité à cibler
         ui.showMessage("Choose enemy unit to attack:");
         ui.displayUnits(defenderPlayer);
         int defenderIndex = ui.readInt() -1;
@@ -364,8 +364,7 @@ if (currentIndex == 0) {
     }
 
 
-  /** Deplacement sur la carte
-   * 
+  /** Deplacement sur map
    * @param player
    */
 

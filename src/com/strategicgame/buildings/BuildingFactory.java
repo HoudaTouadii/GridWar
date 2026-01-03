@@ -1,12 +1,11 @@
 package com.strategicgame.buildings;
 
+import com.strategicgame.resources.ResourceType;
 /**
  * BuildingFactory implements the Factory Design Pattern.
  * Responsible for creating buildings - encapsulates building instantiation.
- * Supports the Open/Closed Principle - easy to add new building types.
+ * easy to add new building types.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class BuildingFactory {
     
@@ -47,8 +46,7 @@ public class BuildingFactory {
     }
 
     /**
-     * Gets all available building types.
-     * 
+     * Gets all available building types. 
      * @return Array of building type names
      */
     public static String[] getAvailableBuildings() {
@@ -56,12 +54,11 @@ public class BuildingFactory {
     }
 
     /**
-     * Gets cost of a building type without instantiating it.
-     * 
+     * Gets cost of a building type without instantiating it. 
      * @param buildingType Type name
      * @return Cost map, or null if not found
      */
-    public static java.util.Map<com.strategicgame.resources.ResourceType, Integer> 
+    public static java.util.Map<ResourceType, Integer> 
             getBuildingCost(String buildingType) {
         Building building = createBuilding(buildingType);
         return building != null ? building.getConstructionCost() : null;

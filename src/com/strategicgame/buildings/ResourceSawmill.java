@@ -7,8 +7,6 @@ import java.util.*;
  * ResourceSawmill building - produces wood resources.
  * Built on forest terrain for bonus production.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class ResourceSawmill extends Building {
     private static final int HEALTH = 40;

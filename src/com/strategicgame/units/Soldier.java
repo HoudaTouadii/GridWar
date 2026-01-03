@@ -6,8 +6,6 @@ import java.util.Random;
  * Soldier unit - balanced infantry unit with moderate stats.
  * Example of Inheritance and Polymorphism.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class Soldier extends Unit {
     private static final int HEALTH = 20;

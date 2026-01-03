@@ -7,12 +7,11 @@ import java.util.*;
 
 /**
  * Abstract base class for all buildings in the game.
- * Defines contract for building behavior - construction, production, and effects.
- * Implements Abstraction principle - concrete buildings extend this.
+ * Defines building behavior: construction, production, and effects.
+ * Implementation des principes d'abstraction, concrete buildings extend this.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
+
 public abstract class Building {
     private final String name;
     private final Map<ResourceType, Integer> constructionCost;
@@ -40,7 +39,6 @@ public abstract class Building {
 
     /**
      * Gets the building name.
-     * 
      * @return Building name
      */
     public String getName() {
@@ -49,7 +47,6 @@ public abstract class Building {
 
     /**
      * Gets construction cost.
-     * 
      * @return Map of resource types and costs
      */
     public Map<ResourceType, Integer> getConstructionCost() {
@@ -58,7 +55,6 @@ public abstract class Building {
 
     /**
      * Gets construction time in turns.
-     * 
      * @return Construction turns
      */
     public int getConstructionTime() {
@@ -67,7 +63,6 @@ public abstract class Building {
 
     /**
      * Gets health points.
-     * 
      * @return Max health
      */
     public int getHealth() {
@@ -76,7 +71,6 @@ public abstract class Building {
 
     /**
      * Gets current health.
-     * 
      * @return Current health
      */
     public int getCurrentHealth() {
@@ -84,8 +78,7 @@ public abstract class Building {
     }
 
     /**
-     * Damages the building.
-     * 
+     * Damages the building. 
      * @param damage Damage to apply
      */
     public void takeDamage(int damage) {
@@ -95,7 +88,6 @@ public abstract class Building {
 
     /**
      * Gets armor value.
-     * 
      * @return Armor points
      */
     public int getArmor() {
@@ -104,7 +96,6 @@ public abstract class Building {
 
     /**
      * Gets position of building.
-     * 
      * @return Position on map
      */
     public Position getPosition() {
@@ -113,7 +104,7 @@ public abstract class Building {
 
     /**
      * Sets position of building.
-     * 
+     * (the option of deplacing a building was supposed to be added but we didn't finish it :'))
      * @param position New position
      */
     public void setPosition(Position position) {
@@ -122,7 +113,6 @@ public abstract class Building {
 
     /**
      * Gets owner player.
-     * 
      * @return Owning player
      */
     public Player getOwner() {
@@ -130,8 +120,7 @@ public abstract class Building {
     }
 
     /**
-     * Sets owner player.
-     * 
+     * Sets owner player. 
      * @param owner New owner
      */
     public void setOwner(Player owner) {
@@ -140,7 +129,6 @@ public abstract class Building {
 
     /**
      * Updates construction progress.
-     * 
      * @return true if construction completed
      */
     public boolean updateConstruction() {
@@ -179,13 +167,13 @@ public abstract class Building {
      * Called when construction is completed - override for special effects.
      */
     protected void onConstructionComplete() {
-        // Override in subclasses
+        // Override dans les subclasses
     }
 
     /**
      * Gets remaining construction time.
      * 
-     * @return Turns until complete
+     * @return How many turns left until complete
      */
     public int getRemainingConstructionTime() {
         return Math.max(0, remainingConstructionTime);
@@ -197,21 +185,23 @@ public abstract class Building {
     public abstract void produce();
 
     /**
-     * Gets production rate per turn.
-     * 
+     * Gets production rate per turn. 
      * @return Production amount
      */
     public abstract int getProductionRate();
 
     /**
      * Checks if building is destroyed.
-     * 
      * @return true if health <= 0
      */
     public boolean isDestroyed() {
         return currentHealth <= 0;
     }
 
+    /**
+     * Displays the name, HP nd statut of construction
+     * @return 'nom(HP:valeur, Constructed:Vrai/Faux)'
+     */
     @Override
     public String toString() {
         return String.format("%s(HP:%d, Constructed:%b)", 

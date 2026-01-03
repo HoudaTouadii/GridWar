@@ -2,15 +2,12 @@ package com.strategicgame.core;
 
 import com.strategicgame.player.Player;
 import com.strategicgame.map.GameMap;
-import com.strategicgame.ui.GameUI;
 import java.util.*;
 
 /**
  * Singleton GameManager responsible for game state management and turn coordination.
- * Implements the Singleton pattern for centralized game control.
+ * Implements the Singleton pattern.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class GameManager {
     private static GameManager instance;
@@ -19,7 +16,6 @@ public class GameManager {
     private List<Player> players;
     private int currentPlayerIndex;
     private int turnNumber;
-    private GameUI ui;
     private boolean gameOver;
     private Player winner;
 
@@ -32,7 +28,6 @@ public class GameManager {
 
     /**
      * Gets the singleton instance of GameManager.
-     * 
      * @return The GameManager instance
      */
     public static synchronized GameManager getInstance() {
@@ -161,33 +156,4 @@ public class GameManager {
         return winner;
     }
 
-    /**
-     * Saves the current game state.
-     * 
-     * @param filename File to save to
-     */
-    public void saveGame(String filename) {
-        // Implementation for saving game state
-    }
-
-    /**
-     * Loads a game from file.
-     * 
-     * @param filename File to load from
-     */
-    public void loadGame(String filename) {
-        // Implementation for loading game state
-    }
-
-    /**
-     * Resets the game manager for a new game.
-     */
-    public void reset() {
-        players.clear();
-        currentPlayerIndex = 0;
-        turnNumber = 1;
-        gameOver = false;
-        winner = null;
-        gameMap = null;
-    }
 }

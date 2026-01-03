@@ -6,16 +6,13 @@ import java.util.Random;
 /**
  * GameUtils provides utility functions for the game.
  * Includes helper methods for calculations, validations, and operations.
- * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class GameUtils {
     private static final Random random = new Random();
 
     /**
      * Calculates distance between two positions using Manhattan distance.
-     * 
+     * (taken from position class in the package map)
      * @param from Starting position
      * @param to Ending position
      * @return Manhattan distance
@@ -26,7 +23,7 @@ public class GameUtils {
 
     /**
      * Calculates distance using Euclidean formula.
-     * 
+     * (also taken from position class)
      * @param from Starting position
      * @param to Ending position
      * @return Euclidean distance
@@ -36,8 +33,7 @@ public class GameUtils {
     }
 
     /**
-     * Generates random integer between min and max (inclusive).
-     * 
+     * Generates random integer between min and max (inclusive). 
      * @param min Minimum value
      * @param max Maximum value
      * @return Random integer
@@ -50,8 +46,7 @@ public class GameUtils {
     }
 
     /**
-     * Generates random double between 0 and 1.
-     * 
+     * Generates random double between 0 and 1. 
      * @return Random double
      */
     public static double getRandomDouble() {
@@ -60,7 +55,6 @@ public class GameUtils {
 
     /**
      * Checks if a value is within a range.
-     * 
      * @param value The value to check
      * @param min Minimum value
      * @param max Maximum value
@@ -71,8 +65,7 @@ public class GameUtils {
     }
 
     /**
-     * Clamps a value between min and max.
-     * 
+     * Clamps a value between min and max. 
      * @param value The value to clamp
      * @param min Minimum value
      * @param max Maximum value
@@ -86,7 +79,6 @@ public class GameUtils {
 
     /**
      * Clamps a double value between min and max.
-     * 
      * @param value The value to clamp
      * @param min Minimum value
      * @param max Maximum value
@@ -100,7 +92,6 @@ public class GameUtils {
 
     /**
      * Calculates percentage of a value.
-     * 
      * @param value The value
      * @param percentage The percentage
      * @return Calculated percentage value
@@ -110,8 +101,7 @@ public class GameUtils {
     }
 
     /**
-     * Formats a number with commas for display.
-     * 
+     * Formats a number with commas for display. 
      * @param number The number to format
      * @return Formatted string
      */
@@ -120,8 +110,7 @@ public class GameUtils {
     }
 
     /**
-     * Checks if position is valid (not null).
-     * 
+     * Checks if position is valid (not null). 
      * @param position Position to check
      * @return true if position is valid
      */
@@ -131,7 +120,6 @@ public class GameUtils {
 
     /**
      * Gets time string for display (e.g., "5 turns", "1 turn").
-     * 
      * @param turns Number of turns
      * @return Formatted time string
      */
@@ -140,8 +128,7 @@ public class GameUtils {
     }
 
     /**
-     * Capitalizes first letter of a string.
-     * 
+     * Capitalizes first letter of a string. 
      * @param str The string to capitalize
      * @return Capitalized string
      */
@@ -152,7 +139,6 @@ public class GameUtils {
 
     /**
      * Gets plural form of a word.
-     * 
      * @param word The word
      * @param count The count
      * @return Plural or singular form
@@ -162,8 +148,7 @@ public class GameUtils {
     }
 
     /**
-     * Validates name string.
-     * 
+     * Validates name string. 
      * @param name The name to validate
      * @return true if name is valid
      */

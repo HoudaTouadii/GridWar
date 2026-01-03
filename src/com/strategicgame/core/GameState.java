@@ -3,9 +3,7 @@ package com.strategicgame.core;
 /**
  * Enum representing different game states.
  * Supports state transitions for menu, gameplay, pause, and game over states.
- * 
- * @author Strategic Game Team
- * @version 1.0
+ *
  */
 public enum GameState {
     MENU("Main Menu"),

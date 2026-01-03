@@ -2,10 +2,7 @@ package com.strategicgame.util;
 
 /**
  * Constants class contains all game constants and configuration values.
- * Centralizes magic numbers for easy tweaking and maintenance.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class Constants {
     // Map Configuration

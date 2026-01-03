@@ -7,8 +7,6 @@ import com.strategicgame.units.Unit;
  * Allows systems to be notified when combat events occur.
  * Supports loose coupling between combat and other systems.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public interface CombatObserver {
     

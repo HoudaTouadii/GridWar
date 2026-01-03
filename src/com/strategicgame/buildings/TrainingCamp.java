@@ -7,8 +7,6 @@ import java.util.*;
  * TrainingCamp building - produces military units.
  * Required to train Soldiers, Archers, and Cavalry.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class TrainingCamp extends Building {
     private static final int HEALTH = 60;

@@ -6,8 +6,6 @@ import java.util.Random;
  * Archer unit - ranged unit with high range but lower health.
  * Specialized damage calculation with range bonus.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class Archer extends Unit {
     private static final int HEALTH = 15;

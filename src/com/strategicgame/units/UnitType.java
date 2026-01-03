@@ -4,8 +4,6 @@ package com.strategicgame.units;
  * Enum for unit types.
  * Used by the UnitFactory for type-safe unit creation.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public enum UnitType {
     SOLDIER("Soldier", 50),

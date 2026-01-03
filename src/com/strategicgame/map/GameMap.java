@@ -1,15 +1,12 @@
 package com.strategicgame.map;
 
 import java.util.*;
-
 import com.strategicgame.units.Unit;
 
 /**
  * GameMap manages the game world grid.
  * Responsible for map generation, tile management, and pathfinding.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class GameMap {
     private final int width;
@@ -44,8 +41,7 @@ public class GameMap {
     }
 
     /**
-     * Gets a tile at the specified position.
-     * 
+     * Gets a tile at the specified position. 
      * @param position The position to query
      * @return The tile at this position, or null if out of bounds
      */
@@ -54,8 +50,7 @@ public class GameMap {
     }
 
     /**
-     * Gets a tile at X, Y coordinates.
-     * 
+     * Gets a tile at X, Y coordinates. 
      * @param x X coordinate
      * @param y Y coordinate
      * @return The tile, or null if out of bounds
@@ -66,7 +61,6 @@ public class GameMap {
 
     /**
      * Checks if a position is within map bounds.
-     * 
      * @param position The position to check
      * @return true if valid position
      */
@@ -76,8 +70,7 @@ public class GameMap {
     }
 
     /**
-     * Gets all tiles as a collection.
-     * 
+     * Gets all tiles as a collection. 
      * @return Collection of all tiles
      */
     public Collection<Tile> getAllTiles() {
@@ -86,7 +79,6 @@ public class GameMap {
 
     /**
      * Gets all tiles of a specific type.
-     * 
      * @param type The tile type to search for
      * @return List of matching tiles
      */
@@ -101,8 +93,7 @@ public class GameMap {
     }
 
     /**
-     * Finds a path from start to end position using A* algorithm.
-     * 
+     * Finds a path from start to end position
      * @param start Starting position
      * @param end Ending position
      * @return List of positions representing the path, empty if no path found
@@ -127,8 +118,7 @@ public class GameMap {
     }
 
     /**
-     * Gets the map width.
-     * 
+     * Gets the map width. 
      * @return Width in tiles
      */
     public int getWidth() {
@@ -136,8 +126,7 @@ public class GameMap {
     }
 
     /**
-     * Gets the map height.
-     * 
+     * Gets the map height. 
      * @return Height in tiles
      */
     public int getHeight() {
@@ -145,7 +134,7 @@ public class GameMap {
     }
 
     /**
-     * Displays the map in console (for debugging).
+     * Displays the map in console .
      */
     public void displayMap() {
         for (int y = 0; y < height; y++) {
@@ -161,22 +150,17 @@ public class GameMap {
         }
     }
 
-    /**
-     * 
-     */
 
     public Position findUnitPosition(Unit unit) {
     for (Map.Entry<Position, Tile> entry : tiles.entrySet()) {
         Tile tile = entry.getValue();
         Object occupant = tile.getOccupant();   // Unit ou Building
 
-        if (occupant == unit) {                // même instance
+        if (occupant == unit) {                // same instance
             return entry.getKey();             // la Position associée
         }
     }
     return null;
 }
-
-
 
 }

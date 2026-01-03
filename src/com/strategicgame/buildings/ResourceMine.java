@@ -7,8 +7,6 @@ import java.util.*;
  * ResourceMine building - produces stone resources.
  * Built on mountain terrain for bonus production.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class ResourceMine extends Building {
     private static final int HEALTH = 40;

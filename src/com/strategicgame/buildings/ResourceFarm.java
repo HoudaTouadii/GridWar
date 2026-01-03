@@ -7,8 +7,6 @@ import java.util.*;
  * ResourceFarm building - produces food resources.
  * Built on grassland for best production.
  * 
- * @author Strategic Game Team
- * @version 1.0
  */
 public class ResourceFarm extends Building {
     private static final int HEALTH = 35;
